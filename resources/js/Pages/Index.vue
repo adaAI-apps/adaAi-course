@@ -1,7 +1,10 @@
-<template>
-    <Header/>
-</template>
+<template></template>
 
-<script setup>
-import Header from '../Organisms/Header.vue';
+<script>
+import Layout from "../Layouts/Index.vue";
+
+export default {
+    layout: Layout,
+};
 </script>
+<script setup></script>
