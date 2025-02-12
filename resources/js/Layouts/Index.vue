@@ -1,6 +1,8 @@
 <template>
     <Header />
-    <div class="py-20"></div>
+    <div class="py-20">
+        <slot />
+    </div>
 </template>
 
 <script setup>

@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -33,6 +34,15 @@ class AuthController extends Controller
         );
 
         Auth::login($user, true);
+
+        $isNewUser = $user->wasRecentlyCreated;
+
+        if ($isNewUser) {
+            event(new Registered($user));
+            return redirect()->route('verification.notice');
+        }
+
+        event(new Registered($user));
 
         if ($user->roles_id == 1) {
             return redirect()->route('admin.index');
